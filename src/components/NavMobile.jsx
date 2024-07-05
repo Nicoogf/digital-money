@@ -9,15 +9,15 @@ const NavMobile = () => {
     </div>
 
     <div>
-    <Link href="/dashboard/transfer"> Transferencias </Link>
+    <Link href="/dashboard/transfer"> Cargar Dinero </Link>
     </div>
 
     <div>
-    <Link href="/dashboard/activity"> Movimientos </Link>
+    <Link href="/dashboard/activity"> Actividad </Link>
     </div>
 
     <div>
-    <Link href="/dashboard/payments"> Pagos </Link>
+    <Link href="/dashboard/cards"> Tarjetas </Link>
     </div>
 
     <div>
