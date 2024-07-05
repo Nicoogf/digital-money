@@ -10,17 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="h-screen w-full max-h-screen relative z-50 bg-gray-950/90">
-      <nav className="absolute z-50 w-full bg-gray-800 text-lime-500 bottom-0 h-12 flex items-center">
-
-      </nav>
-     
-        
         {children}
-        
-        
-        <footer className="absolute z-50 w-full bg-gray-800 text-lime-500 bottom-0 h-12 flex items-center "> 
-          <h6 className="ml-4 text-sm">Digital Money App 2024</h6>
-        </footer>
         <Background />
       </body>
     </html>
