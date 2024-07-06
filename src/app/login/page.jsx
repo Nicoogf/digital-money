@@ -4,10 +4,13 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import logo from "../../../public/logo-off.png"
 import axios, { AxiosError } from 'axios'
+import { useRouter } from 'next/navigation'
+
 
 const LoguinPage = () => {
   const[ credentials, setCredentials] = useState()
   const [ errors, setErrors ] = useState()
+  const router = useRouter()
 
   const handleChange = (e) =>{
    setCredentials({
@@ -22,6 +25,7 @@ const LoguinPage = () => {
       console.log(credentials)
       const res = await axios.post("/api/auth/login" , credentials)
       console.log(res)
+      router.push("/dashboard")
     } catch (error) {
       console.log(error)
       if( error instanceof AxiosError){

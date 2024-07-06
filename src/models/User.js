@@ -1,3 +1,4 @@
+import { Generador_CBU } from "@/libs/alias";
 import { model, models, Schema } from "mongoose";
 
 const UserSchema = new Schema({
@@ -28,6 +29,11 @@ const UserSchema = new Schema({
         type: String,
         require: [true , "La contraseña es requerida"],
         minLength: 6
+    },
+    cbu:{
+        type: Number,
+        default: Generador_CBU (),
+        unique: true
     }
 })
 

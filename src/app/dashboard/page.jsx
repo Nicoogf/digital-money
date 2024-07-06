@@ -1,8 +1,23 @@
+"use client"
+import axios from 'axios';
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 
 const Layout = () => {
+
+
+
+  const getData = async () => {
+    try {
+      const res =  await axios.post("/api/profile")
+      console.log(res)     
+    } catch (error) {
+     console.log(error.message) 
+    }
+  }
+
+
   return (
 
     <div>
@@ -11,8 +26,9 @@ const Layout = () => {
         <p> $200 </p>
         <p> Ver tarjetas</p>
         <p> Ver CBU </p>
+        <button onClick={getData} className='bg-red-500 p-2 text-white'> Cargar info </button>
       </div>
-
+        
       <div className='mt-2 flex flex-row gap-x-2 justify-center'>
         <Link href="/" className='bg-lime-500 text-lime-900 font-semibold p-1 rounded-md'>Cargar Dinero</Link>
         <Link href="/" className='bg-lime-500 text-lime-900 font-semibold p-1 rounded-md'>Pagar Servicio</Link>

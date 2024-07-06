@@ -4,12 +4,13 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs"
 import { connectDB } from "@/libs/mongobd";
 import jwt from "jsonwebtoken" ;
+import { cookies } from "next/headers";
 
 export async function POST(request) {
 
     connectDB()
 
-    const { name, lastName, dni ,phone , email, password } = await request.json()
+    const { name, lastName, dni ,phone , email, password , cbu} = await request.json()
 
     if (!password || !email || !name || !lastName || !dni || !phone) {
         return NextResponse.json({
@@ -65,26 +66,22 @@ export async function POST(request) {
             dni ,
             phone , 
             email,
+            cbu,
             password: hashPassword
         })
 
         const userSaved = await newUser.save()
 
-        const token = await jwt.sign({ 
-            id : userSaved._id
+        const token = jwt.sign({ 
+            id : userSaved._id,
+            email : userSaved.email
         },"clave_secreta")
 
         console.log(token)
+        
+        const tokensaved = cookies().set('new_token', token)
         return NextResponse.json({token})
-        // console.log(userSaved)
-        // return NextResponse.json({
-        //     _id: userSaved._id,
-        //     name: userSaved.name,
-        //     lastName: userSaved.lastName,
-        //     email: userSaved.email,
-        //     phone: userSaved.phone,
-        //     dni: userSaved.dni
-        // })
+   
     } catch (error) {
         console.log(error)
         if (error instanceof Error) {
