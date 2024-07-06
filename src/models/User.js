@@ -27,7 +27,6 @@ const UserSchema = new Schema({
     password: {
         type: String,
         require: [true , "La contraseña es requerida"],
-        select: false,
         minLength: 6
     }
 })

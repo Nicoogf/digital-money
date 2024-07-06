@@ -3,7 +3,7 @@ import User from "@/models/User";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs"
 import { connectDB } from "@/libs/mongobd";
-
+import jwt from "jsonwebtoken" ;
 
 export async function POST(request) {
 
@@ -70,15 +70,21 @@ export async function POST(request) {
 
         const userSaved = await newUser.save()
 
-        console.log(userSaved)
-        return NextResponse.json({
-            _id: userSaved._id,
-            name: userSaved.name,
-            lastName: userSaved.lastName,
-            email: userSaved.email,
-            phone: userSaved.phone,
-            dni: userSaved.dni
-        })
+        const token = await jwt.sign({ 
+            id : userSaved._id
+        },"clave_secreta")
+
+        console.log(token)
+        return NextResponse.json({token})
+        // console.log(userSaved)
+        // return NextResponse.json({
+        //     _id: userSaved._id,
+        //     name: userSaved.name,
+        //     lastName: userSaved.lastName,
+        //     email: userSaved.email,
+        //     phone: userSaved.phone,
+        //     dni: userSaved.dni
+        // })
     } catch (error) {
         console.log(error)
         if (error instanceof Error) {
